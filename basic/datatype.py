@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
 # escape character
 print('I\'m \"ok\"!')
 print('\\\n\\')
@@ -26,14 +30,23 @@ b = a
 a = 20
 print(a, b)
 
-#通常用全部大写的变量名表示常量
+# 通常用全部大写的变量名表示常量
 PI = 3.14159265359
 
-#除法
-#一种除法是/：
+# 除法
+# 一种除法是/：
 print(10/3, 9/3)
-#还有一种除法是//，称为地板除，两个整数的除法仍然是整数：
+# 还有一种除法是//，称为地板除，两个整数的除法仍然是整数：
 print(10 // 3)
 print(10 % 3)
 
+# Unicode
+print('包含中文的str')
+# ord()函数获取字符的整数表示，chr()函数把编码转换为对应的字符
+print(ord('A'), ord('中'), chr(66), chr(25991))
+print('\u4e2d\u6587')
+print(len('ABC'),len('中文'.encode('utf-8')), len(b'ABC'))
+
+b = 'name: %s, age: %d, height: %.2f' % ('palesnow', 26, 183.3)
+print(b)
 
