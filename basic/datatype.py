@@ -58,3 +58,9 @@ print(f, h)
 f1 = float(2)
 print(f1)
 
+#复数
+c = complex(4)
+print(c)
+
+z = 1.23e-4 + 5.4e-1 + 89j
+print(z.real, z.imag)
