@@ -50,3 +50,11 @@ print(len('ABC'),len('中文'.encode('utf-8')), len(b'ABC'))
 b = 'name: %s, age: %d, height: %.2f' % ('palesnow', 26, 183.3)
 print(b)
 
+
+f = int(4.6)
+h = int(4.2)
+print(f, h)
+
+f1 = float(2)
+print(f1)
+
