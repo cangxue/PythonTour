@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 
 # escape character
 print('I\'m \"ok\"!')

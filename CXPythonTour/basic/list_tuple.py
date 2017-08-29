@@ -1,3 +1,4 @@
+
 #list
 classmates = ['Michael', 'Bob', 'Tracy']
 a = len(classmates)

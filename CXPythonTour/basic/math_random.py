@@ -1,10 +1,10 @@
+
 #数学库math
 from math import *
 from random import *
 from time import clock
 
 print(pi)
-
 f = pi
 c1 = ceil(f)
 c2 = floor(f)
