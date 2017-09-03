@@ -151,6 +151,7 @@ while True:
         break
 
 # 杨辉三角
+# 方法一
 def triangles():
     L = [1]
     while True: #一直循环生成无限临时数据
@@ -165,7 +166,7 @@ for x in triangles():
     if n == 10:
         break
 
-
+# 方法二
 def triangles(lines):
     L = [1]
     n = 0
