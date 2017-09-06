@@ -86,7 +86,7 @@ print(L)
 def not_empty(s):
     return s and s.strip()
 L = list(filter(not_empty, ['A', '', 'B', None, 'C', '  ']))
-print(L)
+# print(L)
 
 # 取素数
 # 1.这是一个生成器，并且是一个无限序列。
@@ -125,5 +125,34 @@ def is_same(n):
         if a[i] != a[num - 1 - i]:
             result = False
     return result
+L = list(filter(is_same, range(900, 1000)))
+# print(L)
 
-print(list(filter(is_same, range(900, 1000))))
+
+# sorted
+L = [36, 5, -12, 9, -21]
+print(sorted(L))
+# 绝对值大小排序
+print(sorted(L, key=abs))
+
+L = ['bob', 'about', 'Zoo', 'Credit']
+print(sorted(L))
+
+print(sorted(L, key=str.lower))
+
+# 要进行反向排序，不必改动key函数，可以传入第三个参数reverse=True：
+print(sorted(L, key=str.lower, reverse=True))
+
+# 成绩排序
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+def by_name(t):
+    return t[0]
+L1 = sorted(L, key=by_name)
+print(L1)
+
+def by_score(t):
+    return t[1]
+L2 = sorted(L, key=by_score)
+print(L2)
+
+from operator import *
