@@ -221,3 +221,99 @@ print(f(5))
 def build(x, y):
     return lambda: x * x + y * y
 print(build(4, 5)())
+
+# 装饰器
+# 由于函数也是一个对象，而且函数对象可以被赋值给变量，所以，通过变量也能调用该函数。
+def now():
+    print('2017-9-7')
+
+f = now
+f()
+
+# 函数对象有一个__name__属性，可以拿到函数的名字：
+print(f.__name__)
+
+# 在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）
+# 本质上，decorator就是一个返回函数的高阶函数
+def log(func):
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+
+# 我们要借助Python的@语法，把decorator置于函数的定义处：
+@log
+def now():
+    print('2017-9-7-4-57')
+
+now()
+
+@log
+def build(x, y):
+    return lambda: x * x + y * y
+print(build(4, 5)())
+
+# 在wrapper()函数内，首先打印日志，再紧接着调用原始函数。
+
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@log('execute')
+def now():
+    print('2017-9-7-4-57')
+
+now()
+print(now.__name__)
+
+import functools
+def log(text):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@log('execute22')
+def now():
+    print('2017-9-7-4-57')
+
+now()
+print(now.__name__)
+
+# 在面向对象（OOP）的设计模式中，decorator被称为装饰模式。
+# OOP的装饰模式需要通过继承和组合来实现
+
+def log(text='call'):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            # try:
+            #     print('%s %s %s():' % ('begin', text, func.__name__))
+            #     return func(*args, **kw)
+            # finally:
+            #     print('%s %s %s():' % ('end', text, func.__name__))
+
+            print('%s %s %s():' % ('begin', text, func.__name__))
+            func(*args, **kw)
+            print('%s %s %s():' % ('end', text, func.__name__))
+        return wrapper
+    return decorator
+
+@log()
+def now1():
+    print('2017-9-7')
+
+@log('execute')
+def now2():
+    print('2017-9-7')
+
+now1()
+now2()
+
