@@ -203,3 +203,21 @@ def count():
 
 f4, f5, f6 = count()
 print(f4(), f5(), f6())
+
+L = count() # 返回的是个函数list
+print(L[0](), L[1](), L[2]())
+
+
+# 匿名函数
+# 关键字lambda表示匿名函数，冒号前面的x表示函数参数。
+# 匿名函数有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果。
+L = list(map(lambda x: x * x, [1, 2, 3]))
+print(L)
+
+f = lambda x: x + x
+print(f(5))
+
+# 匿名函数作为返回值返回
+def build(x, y):
+    return lambda: x * x + y * y
+print(build(4, 5)())
