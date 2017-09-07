@@ -317,3 +317,17 @@ def now2():
 now1()
 now2()
 
+
+
+# 偏函数
+
+print(int('12345'))
+print(int('12345', base=8))
+
+def int2(x, base=2):
+    return int(x, base)
+print(int2('1000000'))
+
+int3 = functools.partial(int, base=2)
+print(int3('1010101'))
+# functools.partial就是把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，
