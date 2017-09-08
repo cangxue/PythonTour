@@ -340,3 +340,9 @@ print(max2(5, 6, 7))
 
 args = (11, 5, 6, 7)
 print(max(*args))
+
+
+import test_module
+
+x = test_module.addFunc(12, 23)
+print('调用test_module模块执行的结果是:', x)
