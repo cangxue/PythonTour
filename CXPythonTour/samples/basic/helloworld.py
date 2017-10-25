@@ -1,9 +1,8 @@
 
+# 直接打印
 print('Hello, world！')
 
-name = input()
+# 带输入的打印
+name = input('please enter your name:')
 print('hello', name)
-
-name1 = input('please enter your name:')
-print('hello', name1)
 
