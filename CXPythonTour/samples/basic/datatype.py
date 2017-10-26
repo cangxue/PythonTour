@@ -1,5 +1,28 @@
 
-# escape character
+# 常量
+
+# 数
+a1 = 2
+a2 = 23.4E-4
+a3 = (-5+4j)
+print(a1, a2, a3.real)
+
+# 字符串
+b1 = '''This is a multi-line string. "What's your name?" ;'i asked' '''
+print(b1)
+
+# escape character/转义符
+b2 = 'What\'s your name?'
+b3 = '用转义符 \\来指示反斜杠本身'
+b4 = "This is the first sentence.\
+This is the second sentence."
+print(b2, b3, b4)
+
+# 变量
+i = 5
+print(i)
+
+
 print('I\'m \"ok\"!')
 print('\\\n\\')
 print('\\\t\\')
