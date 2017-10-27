@@ -18,7 +18,7 @@ def my_abs(x):
 
 def quadratic(a, b, c):
     delta = b**2 - 4*a*c
-    if not  isinstance(a, (int, float)) and not isinstance(b, (int, float)) and not isinstance(c, (int, float)):
+    if not isinstance(a, (int, float)) and not isinstance(b, (int, float)) and not isinstance(c, (int, float)):
         raise TypeError('请输入正确的系数')
     if delta >= 0:
         x1 = (-b + sqrt(delta)) / (2 * a)
@@ -153,3 +153,13 @@ def move(n,a,b,c):
         return move(n - 1, b, a, c)
 
 move(2,'A','B','C')
+
+def func1():
+    global x
+
+    print('x is', x)
+    x = 2
+    print('changed local x to', x)
+x = 50
+func1()
+print('value of x is', x)
