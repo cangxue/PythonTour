@@ -164,3 +164,6 @@ x = 50
 func1()
 print('value of x is', x)
 
+#
+print(divmod(13, 5))
+# 返回（2，3）
