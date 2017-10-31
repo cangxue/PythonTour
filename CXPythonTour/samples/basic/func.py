@@ -163,3 +163,4 @@ def func1():
 x = 50
 func1()
 print('value of x is', x)
+
