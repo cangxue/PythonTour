@@ -19,3 +19,12 @@ class Singleton(object): # 抽象单例
             orig = super(Singleton, cls)
             cls._instance = orig.__new__(cls, *args, **kwargs)
         return cls._instance
+
+# 总线
+class Bus(Singleton):
+    lock = threading.RLock()
+    def sendData(self, data):
+        self.lock.acquire()
+        time.sleep(3)
+        print("Sending Signal Data...", data)
+        self.lock.release()
