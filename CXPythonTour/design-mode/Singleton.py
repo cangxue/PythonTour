@@ -28,3 +28,21 @@ class Bus(Singleton):
         time.sleep(3)
         print("Sending Signal Data...", data)
         self.lock.release()
+# 线程对象，为更加说明单例的含义，将Bus对象实例化写在run里
+class VisitEntity(threading.Thread):
+    my_bus = ''
+    name = ''
+    def getName(self):
+        return self.name
+    def setName(self, name):
+        self.name = name
+    def run(self):
+        self.my_bus = Bus()
+        self.my_bus.sendData(self.name)
+
+if __name__ == "__main__":
+    for i in range(3):
+        print("Entity %d begin to run..." %i)
+        my_entity = VisitEntity()
+        my_entity.setName("entity_" + str(i))
+        my_entity.start()
