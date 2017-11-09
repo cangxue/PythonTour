@@ -9,97 +9,90 @@ Created on 2017-11-07
 
 """
 
-# 快餐点餐系统
-# 主餐生成
-class Burger(): # 抽象产品类
-    name = ""
-    price = 0.0
-    def getPrice(self):
-        return self.price
-    def setPrice(self, price):
-        self.price = price
-    def getName(self):
-        return self.name
-class cheeseBurger(Burger): # 具体产品类
-    def __init__(self):
-        self.name = "cheese burger"
-        self.price = 10.0
-class spicyChickenBurger(Burger): # 具体产品类
-    def __init__(self):
-        self.name = "spicy chicken burger"
-        self.price = 15.0
+#************ 产品类 **************#
+# 抽象产品类
+class Button():
+    def display(self):
+        print("显示button")
+# 具体产品类
+class RedButton(Button):
+    def display(self):
+        print("显示红色button")
+class GreenButton(Button):
+    def display(self):
+        print("显示绿色button")
 
-# 小食
-class Snack(): # 抽象产品类
-    name = ""
-    price = 0.0
-    type = "SNACK"
-    def getPrice(self):
-        return self.price
-    def setPrice(self, price):
-        self.price = price
-    def getName(self):
-        return self.name
-class chips(Snack): # 具体产品类
-    def __init__(self):
-        self.name = "chips"
-        self.price = 6.0
-class chickenWings(Snack): # 具体产品类
-    def __init__(self):
-        self.name = "chicken wings"
-        self.price = 12.0
+# 抽象产品类
+class TextField():
+    def display(self):
+        print("显示textfield")
+# 具体产品类
+class RedTextField(TextField):
+    def display(self):
+        print("显示红色textfield")
+class GreenTextField(TextField):
+    def display(self):
+        print("显示绿色textfield")
 
-# 饮料
-class Beverage(): # 抽象产品类
-    name = ""
-    price = 0.0
-    type = "BEVERAGE"
-    def getPrice(self):
-        return self.price
-    def setPrice(self, price):
-        self.price = price
-    def getName(self):
-        return self.name
-class coke(Beverage): # 具体产品类
-    def __init__(self):
-        self.name = "coke"
-        self.price = 4.0
-class milk(Beverage): # 具体产品类
-    def __init__(self):
-        self.name = "milk"
-        self.price = 5.0
+#************ 工厂类 **************#
+# 简单工厂模式
+class SimpleFactory():
+    @classmethod
+    def create(cls, factoryClass):
+        factoryIns = factoryClass()
+        return factoryIns
 
+# 工厂模式
+class Factory():
+    def create(self, factoryClass):
+        factoryIns = factoryClass()
+        return factoryIns
 
-# 工厂
-class foodFactory(): # 抽象产品类
-    type = ""
-    def createFood(self, foodClass):
-        print(self.type, "factory produce a instance.")
-        foodIns = foodClass()
-        return foodIns
-class burgerFactory(foodFactory): # 具体产品类
-    def __init__(self):
-        self.type = "BURGER"
-class snackFactory(foodFactory): # 具体产品类
-    def __init__(self):
-        self.type = "SNACK"
-class beverageFactory(foodFactory): # 具体产品类
-    def __init__(self):
-        self.type = "BEBERAGE"
+# 抽象工厂模式
+class AbstractFactory():
+    def createButton(self, factoryClass):
+        factoryIns = factoryClass()
+        return factoryIns
 
+    def createTextField(self, factoryClass):
+        factoryIns = factoryClass()
+        return factoryIns
 
-# 生产产品
+class AbstractRedFactory(AbstractFactory):
+    def createButton(self):
+        button = RedButton()
+        return button
+    def createTextField(self):
+        textField = RedTextField()
+        return textField
+
+class AbstractGreenFactory(AbstractFactory):
+    def createButton(self):
+        button = GreenButton()
+        return button
+    def createTextField(self):
+        textField = GreenTextField()
+        return textField
+
+class FactoryProducer:
+    def getFactory(self, factoryClass):
+        factoryIns = factoryClass()
+        return factoryIns
+
+# ************ 使用工厂 **************#
 if __name__ == "__main__":
-    burger_factory = burgerFactory()
-    snack_factory = snackFactory()
-    beverage_factory = beverageFactory()
+    # 简单工厂模式
+    simple_button = SimpleFactory.create(RedButton)
+    simple_button.display()
 
-    cheese_burger = burger_factory.createFood(cheeseBurger)
-    print(cheese_burger.getName(), cheese_burger.getPrice())
+    # 工厂模式
+    factory = Factory()
+    button = factory.create(GreenButton)
+    button.display()
 
-    chicken_wings = snack_factory.createFood(chickenWings)
-    print(chicken_wings.getName(), chicken_wings.getPrice())
-
-    coke_drink = beverage_factory.createFood(coke)
-    print(coke_drink.getName(), coke_drink.getPrice())
-
+    # 抽象工厂模式
+    abstract_factory = FactoryProducer().getFactory(AbstractGreenFactory)
+    redbutton = abstract_factory.createButton()
+    redbutton.display()
+    redTextField = abstract_factory.createTextField()
+    redTextField.display()
