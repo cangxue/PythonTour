@@ -1,7 +1,7 @@
 # coding=utf-8
 
 """
-Created on 2017-11-03
+Created on 2017-11-13
 @author: Palesnow
 
 功能：原型模式实现
