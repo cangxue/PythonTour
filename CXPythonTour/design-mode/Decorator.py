@@ -30,7 +30,7 @@ class milk(Beverage):
         self.price = 5.0
 
 # 装饰器类
-class drinkDecorator():
+class drinkDecorator(Beverage):
     def getName(self):
         pass
     def getPrice(self):
