@@ -8,6 +8,7 @@ Created on 2017-11-21
 网址：https://yq.aliyun.com/articles/70532?utm_campaign=wenzhang&utm_medium=article&utm_source=QQ-qun&utm_content=m_11968
 
 实例：警报系统
+
 """
 
 # 警报器
