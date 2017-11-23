@@ -1,7 +1,7 @@
 # coding=utf-8
 
 """
-Created on 2017-11-21
+Created on 2017-11-22
 @author: Palesnow
 
 功能：享元模式
