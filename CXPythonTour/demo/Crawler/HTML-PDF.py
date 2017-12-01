@@ -54,7 +54,7 @@ class Crawler(object):
         """
         self.name = name
         self.start_url = start_url
-        self.domain = '{uri.scheme}://{uri:netloc}'.format(uri=urlparse(self.start_url))
+        self.domain = '{uri.scheme}://{uri.netloc}'.format(uri=urlparse(self.start_url))
 
     @staticmethod
     def request(url, **kwargs):
@@ -107,11 +107,12 @@ class Crawler(object):
             f_name = ".".join([str(index), "html"])
             with open(f_name, 'wb') as f:
                 f.write(html)
+
             htmls.append(f_name)
 
         pdfkit.from_file(htmls, self.name + ".pdf", options=options)
         for html in htmls:
-            os.remove(html)j
+            os.remove(html)
         total_time = time.time() - start
         print(u"总共耗时：%f 秒" % total_time)
 
@@ -174,6 +175,6 @@ class LiaoxuefengPythonCrawler(Crawler):
 
 
 if __name__ == '__main__':
-    start_url = ""
+    start_url = "http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000"
     crawler = LiaoxuefengPythonCrawler("廖雪峰Git", start_url)
     crawler.run()
