@@ -1,5 +1,5 @@
 
-#if elif
+# if elif
 s = input('age:')
 age = int(s)
 if age >= 60:
@@ -28,13 +28,13 @@ elif bmi >= 28 and bmi <=32:
 else :
     print('童鞋你长得很圆吧！')
 
-#for  in
+# for  in
 sum = 0
 for x in range(101):
     sum = sum + x
 print(sum)
 
-#while
+# while
 sum = 0
 n = 100
 while n > 0:
@@ -42,7 +42,7 @@ while n > 0:
     n = n - 1
 print(sum)
 
-#break
+# break：提前退出循环
 n = 1
 while n <= 100:
     if n > 10:
@@ -51,7 +51,7 @@ while n <= 100:
     n = n + 1
 print('END')
 
-#continue
+# continue：跳过当前的这次循环
 n = 0
 while n < 10:
     n = n + 1
