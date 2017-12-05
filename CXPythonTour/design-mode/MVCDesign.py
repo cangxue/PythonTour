@@ -45,7 +45,7 @@ class StudentController():
         return self.model.getAge()
 
     def updateView(self):
-        self.view.printStudentDetails(self.getStudentName(),self.getStudentAge())
+        self.view.printStudentDetails(self.getStudentName(), self.getStudentAge())
 
 if __name__ == "__main__":
     model = Student()
