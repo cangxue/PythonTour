@@ -50,8 +50,9 @@ for x, y, z in [(1, 1, 3), (2, 4, 5), (3, 9, 7)]:
 
 # 列表生成式
 l1 = list(range(1, 11))
-L =[]
-for x in range(1,11):
+print(l1)
+L = []
+for x in range(1, 11):
     L.append(x * x)
 print(L)
 
@@ -97,9 +98,9 @@ print(l10)
 
 # 生成器：generator，这种一边循环一边计算的机制，称为生成器
 # 方法一
-L = [x * x for x in range(10)] #list
+L = [x * x for x in range(10)]  # list
 print(L)
-g = (x * x for x in range(10)) #generator
+g = (x * x for x in range(10))  # generator
 for n in g:
     print(n)
 
