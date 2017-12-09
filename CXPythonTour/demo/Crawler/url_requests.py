@@ -151,3 +151,160 @@ import json
 所有Requests显式抛出的异常都继承自 requests.exceptions.RequestException 。
 '''
 
+#=============== 高级用法 ==================
+from requests import Request, Session
+
+# 1、会话对象
+# session = requests.Session()
+# session.get('http://httpbin.org/cookies/set/sessioncookie/123456789')
+# response = session.get('http://httpbin.org/cookies')
+# # print(response.text)
+#
+# session.auth = ('user', 'pass')
+# session.headers.update({'x-test': 'true'})
+# response = session.get('http://httpbin.org/headers', headers={'x-test2': 'true'})
+# print(response.text)
+
+# response = session.get('http://httpbin.org/cookies', cookies={'from-my': 'browser'})
+# print(response.text)
+# response = session.get('http://httpbin.org/cookies')
+# print(response.text)
+
+# with requests.Session() as s:
+#     response = s.get('http://httpbin.org/cookies/set/sessioncookie/123456789')
+#
+# print(response.text)
+
+# 2、请求与响应对象
+# response = requests.get('http://en.wikipedia.org/wiki/Monty_Python')
+# print(response.headers)
+# print(response.request.headers)
+
+# 3、准备的请求
+# url = 'https://github.com/timeline.json'
+# headers = {'user-agent': 'my-app/0.0.1'}
+# payload = {'key1': 'value1', 'key2': 'value2'}
+# session = Session()
+# req = Request('GET', url,
+#               data=payload,
+#               headers=headers)
+# prepped = session.prepare_request(req)
+# resp = session.send(prepped,
+#                     stream=False,
+#                     verify=True,
+#                     proxies=payload,
+#                     cert=None,
+#                     timeout=10)
+# print(resp.status_code)
+# print(resp.text)
+
+# 4、SSL证书验证
+# requests.get('https://requestb.in')
+# print(requests.get('https://github.com', verify=True))
+# requests.get('https://github.com', verify='/path/to/certfile')
+# session = requests.Session()
+# # session.verify = '/path/to/certfile'
+# session.verify = True
+# response = session.get('https://github.com')
+# print(response.text)
+
+# 5、客户端证书
+# session = requests.Session()
+# session.cert = '/path/client.cert'
+# response = requests.get('https://kennethreitz.org', cert='/wrong_path/client.pem')
+# print(response.text)
+
+# 6、响应体内容工作流
+# tarball_url = 'https://github.com/kennethreitz/requests/tarball/master'
+# response = requests.get(tarball_url, stream=True)
+# # print(response.headers)
+# if int(response.headers['Content-Length']) > 0:
+#     content = response.content
+#     print(content)
+
+# with requests.get('http://httpbin.org/get', stream=True) as response:
+#     print(response.text)
+
+
+# 7、流式上传
+# with open('massive-body') as f:
+#     response = requests.post('http://some.url/streamed', data=f)
+# print(response.text)
+
+# 8、块编码请求
+# def gen():
+#     yield 'hi'
+#     yield 'threre'
+# response = requests.post('http://some.url/chunked', data=gen())
+# print(response.text)
+
+# 9、POST 多个分块编码的文件
+# url = 'http://httpbin.org/post'
+# multiple_files=[
+#     ('images', ('foo.png', open('foo.png', 'rb'), 'image/png')),
+#     ('images', ('bar.png', open('bar.png', 'rb'), 'image/png'))
+# ]
+# respons = requests.post(url, files=multiple_files)
+# print(respons.text)
+
+# 10、事件挂钩
+# print_url = 'https://github.com/timeline.json'
+# hooks = dict(response=print_url)
+# resp = requests.get('http://httpbin.org', hooks=hooks)
+# print(resp.text)
+
+# 11、自定义身份验证
+# from requests.auth import AuthBase
+# class PizzaAuth(AuthBase):
+#     def __init__(self, username):
+#         self.username = username
+#     def __call__(self, r):
+#         r.headers['X-Pizza'] = self.username
+#         return r
+#
+# response = requests.get('http://pizzabin.org/admin', auth=PizzaAuth('kenneth'))
+# print(response.status_code)
+
+# 12、流式请求
+# response = requests.get('http://httpbin.org/stream/20', stream=True)
+
+# for line in response.iter_lines():
+#     if line:
+#         decoded_line = line.decode('utf-8')
+#         print(json.loads(decoded_line))
+
+# if response.encoding is None:
+#     response.encoding = 'utf-8'
+# for line in response.iter_lines(decode_unicode=True):
+#     if line:
+#         print(json.loads(line))
+
+# lines = response.iter_lines()
+# first_line = next(lines)
+# for line in lines:
+#     print(line)
+
+# 13、代理
+# proxies = {
+#   "http": "http://10.10.1.10:3128",
+#   "https": "http://10.10.1.10:1080",
+# }
+# # proxies = {'http://10.20.1.128': 'http://10.10.1.10:5323'}
+# # SOCKS
+# proxies = {
+#     'http': 'socks5://user:pass@host:port',
+#     'https': 'socks5://user:pass@host:port'
+# }
+#
+# response = requests.get('http://example.org', proxies=proxies)
+# print(response.text)
+
+# 14、HTTP动词
+r = requests.get('https://api.github.com/repos/requests/requests/git/commits/a050faf084662f3a352dd1a941f2c7c9f886d4ad')
+if (r.status_code == requests.codes.ok):
+    print(r.headers['content-type'])
+commit_data = r.json()
+print(commit_data)
+print(commit_data.keys())
+
+
