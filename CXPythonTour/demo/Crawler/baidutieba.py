@@ -43,10 +43,21 @@ class Tool:
 # 百度贴吧爬虫类
 class BDTB:
     # 初始化
-    def __init__(self, baseUrl, seeLZ):
+    def __init__(self, baseUrl, seeLZ, floorTag):
+        # base链接地址
         self.baseURL = baseUrl
+        # 是否只看楼主：1是
         self.seeLZ = '?see_lz=' + str(seeLZ)
+        # HTML标签剔除工具类对象
         self.tool = Tool()
+        # 全局file变量，文件写入操作对象
+        self.file = None
+        # 楼层标号，初始为1
+        self.floor = 1
+        # 默认标题
+        self.defaultTitle = u'百度贴吧'
+        # 是否写入楼层分隔符的标记
+        self.floorTag = floorTag
 
     # 获取某页帖子的代码
     def getPage(self, pageNum):
@@ -81,19 +92,66 @@ class BDTB:
     def getContent(self, page):
         pattern = re.compile('<div id="post_content_.*?>(.*?)</div>', re.S)
         items = re.findall(pattern, page)
-        floor = 1
+        contents = []
         for item in items:
-            print(floor, u'楼------------------------------------------------------')
-            print(self.tool.replace(item))
-            floor += 1
+            content = "\n" + self.tool.replace(item) + "\n"
+            if len(content) > 50:
+                contents.append(content)
+        return contents
+
+    # 设置文件标题
+    def setFileTitle(self, title):
+        # 如果标题不是为None，即成功获取到标题
+        if title is not None:
+            self.file = open(title + '.txt', "a")
+        else:
+            self.file = open(self.defaultTitle + '.txt', 'a')
+
+    # 写入数据
+    def writeData(self, contents):
+        # 向文件写入每一楼的信息
+        for item in contents:
+            if self.floorTag == 1:
+                # 楼层分隔符
+                floorLine = '\n 第' + str(self.floor) + u"楼-----------\n"
+                self.file.write(floorLine)
+            self.file.write(item)
+            self.floor += 1
+
+    # 开始启动
+    def start(self):
+        indexPage = self.getPage(1)
+        pageNum = self.getPageNum(indexPage)
+        title = self.getTitle(indexPage)
+        self.setFileTitle(title)
+        if pageNum == None:
+            print('URL已失效，请重试')
+            return
+        try:
+            print('改帖子共有' + str(pageNum) + '页')
+            for i in range(1, int(pageNum)+1):
+                print('正在写入第' + str(i) + "页数据")
+                page = self.getPage(i)
+                contents = self.getContent(page)
+                if len(contents) > 0:
+                    self.writeData(contents)
 
 
-
+        # 出现写入异常
+        except IOError as e:
+            print('写入异常，原因：' + e.message)
+        finally:
+            print('写入任务完成')
 
 
 baseURL = 'http://tieba.baidu.com/p/4083780363'
-bdtb = BDTB(baseURL, 1)
+seeLZ = 1
+floorTag = 0
+bdtb = BDTB(baseURL, seeLZ, floorTag)
+bdtb.start()
 
-print(bdtb.getContent(bdtb.getPage(1)))
+
+
+
 
 
