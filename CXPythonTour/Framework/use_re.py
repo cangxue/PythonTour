@@ -49,6 +49,9 @@ print(m.groups())
 # 贪婪匹配
 print(re.match(r'^(\d+)(0*)$', '102300').groups())
 print(re.match(r'^(\d+?)(0*)$', '102300').groups())
+print(re.match(r'a.*c', 'abcabc').group())  # "abcabc"
+print(re.match(r'a.*?c', 'abcabc').group())  # "abc"
+
 # 编译
 """
     当我们在Python中使用正则表达式时，re模块内部会干两件事情：
