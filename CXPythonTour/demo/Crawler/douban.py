@@ -21,9 +21,10 @@ class DOUBAN:
     def __init__(self, baseUrl):
         self.baseURL = baseUrl
 
-    def getPage(self):
+    def getPage(self, pageNum):
         try:
-            response = requests.get(self.baseURL)
+            url = self.baseURL + 'start=' + str(pageNum) + '&type=T'
+            response = requests.get(url)
             if response.status_code == 200:
                 return response.text
             return None
@@ -41,12 +42,15 @@ class DOUBAN:
                 'content': item[3],
             }
     def start(self):
-        page = self.getPage()
-        for item in self.getContent(page):
-            print(item)
+        for i in range(0, 2):
+            page = self.getPage(i)
+            print("===============================第%s数据======================" % i)
+            for item in self.getContent(page):
+                print(item)
 
 
-url = 'https://movie.douban.com/tag/2016?start=' + str(0) + '&type=T'
+
+url = 'https://movie.douban.com/tag/2016?'
 douban = DOUBAN(url)
 douban.start()
 
