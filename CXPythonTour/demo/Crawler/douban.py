@@ -13,14 +13,12 @@ Created on 2017-12-28
 
 import requests
 import re
-import json
-
 
 class DOUBAN:
     # 初始化
     def __init__(self, baseUrl):
         self.baseURL = baseUrl
-
+    # 获取数据
     def getPage(self, pageNum):
         try:
             url = self.baseURL + 'start=' + str(pageNum) + '&type=T'
@@ -30,6 +28,8 @@ class DOUBAN:
             return None
         except requests.RequestException as e:
             print(e)
+
+    # 解析处理数据
     def getContent(self, page):
         pattern = re.compile('<table width=".*?<div class="pl2">.*?>(.*?)</a>.*?class="pl">(.*?)</p>'
                              + '.*?<span class="rating_nums">(.*?)</span>.*?class="pl">(.*?)</span>', re.S)
@@ -41,14 +41,14 @@ class DOUBAN:
                 'average': item[2],
                 'content': item[3],
             }
+
+    # 开始接口
     def start(self):
-        for i in range(0, 2):
-            page = self.getPage(i)
-            print("===============================第%s数据======================" % i)
+        for pageIndex in range(0, 2):
+            page = self.getPage(pageIndex)
+            print("===============================第%s页数据======================" % pageIndex)
             for item in self.getContent(page):
                 print(item)
-
-
 
 url = 'https://movie.douban.com/tag/2016?'
 douban = DOUBAN(url)
