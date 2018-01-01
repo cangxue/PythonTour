@@ -50,6 +50,7 @@ class DOUBAN:
             for item in self.getContent(page):
                 print(item)
 
+# 入口
 url = 'https://movie.douban.com/tag/2016?'
 douban = DOUBAN(url)
 douban.start()
