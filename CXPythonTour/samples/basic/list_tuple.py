@@ -20,6 +20,13 @@ classmates.pop(1)
 # 要把某个元素替换成别的元素，可以直接赋值给对应的索引位置：
 classmates[1] = 'Sarah'
 
+# 使用方法sort()对列表进行永久性排序
+cars = ['bmw', 'audi', 'toyota', 'subaru']
+cars.sort()
+print(cars)
+cars.sort(reverse=True)
+print(cars)
+
 # list里面的元素的数据类型也可以不同
 l1 = ['Apple', 123, True]
 l2 = ['python', 'java', l1, 'scheme']
@@ -28,6 +35,31 @@ print(l2)
 e = l2[2][1]
 print(e) # 123
 
+# 遍历整个列表
+magicians = ['alice', 'david', 'carolina']
+for magician in magicians:
+	print(magician)
+
+for value in range(1,5):
+	print(value)
+
+numbers = list(range(1, 6))
+print(numbers)
+
+numbers = list(range(2, 11, 2))
+print(numbers)
+
+squares = []
+for value in range(1,10):
+	square = value**2
+	squares.append(square)
+print(squares)
+print(min(squares))
+print(max(squares))
+print(sum(squares))
+
+squares2[value**2 for value in range(1,11)]
+print(squares2)
 
 # tuple
 t = (1, 2)
