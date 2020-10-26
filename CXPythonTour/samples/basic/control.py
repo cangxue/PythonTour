@@ -1,4 +1,3 @@
-
 # if elif
 s = input('age:')
 age = int(s)
@@ -11,7 +10,6 @@ elif age >= 6:
 else:
     print('kid')
 
-
 height = input('height:')
 weight = input('weight:')
 
@@ -23,9 +21,9 @@ elif bmi >= 18.5 and bmi <= 25:
     print('童鞋你身材很棒哦！')
 elif bmi >= 25 and bmi <= 28:
     print('童鞋你超重了喔！')
-elif bmi >= 28 and bmi <=32:
+elif bmi >= 28 and bmi <= 32:
     print('童鞋你该减肥啦！')
-else :
+else:
     print('童鞋你长得很圆吧！')
 
 # for  in
@@ -59,3 +57,21 @@ while n < 10:
         continue
     print(n)
 print('END')
+
+# if arr is None:
+#     pass
+# if arr is not None:
+#     pass
+
+# try:
+#     val = d['c']
+# except KeyError:
+#     print('c' not existence)
+
+# 99乘法表
+for i in range(1, 10):
+    for j in range(1, i + 1):
+        print('%d * %d = %d' % (j, i, j * i), end="\t")
+    print()
+
+[1, 2, 3][::-1]
