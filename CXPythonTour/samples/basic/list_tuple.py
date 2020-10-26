@@ -1,4 +1,11 @@
 
+# 切片
+a = [1, 2, 3, 4, 5, 6, 7]
+b = a[1:4]
+c = a[-3:]
+d = a[::2]
+f = a[1:5:2]
+
 # list
 classmates = ['Michael', 'Bob', 'Tracy']
 a = len(classmates)
@@ -10,6 +17,7 @@ print(a, b, c, d)
 
 # list是一个可变的有序表，所以，可以往list中追加元素到末尾
 classmates.append('Adam')
+classmates.extend('Adam','Boy')
 # 也可以把元素插入到指定的位置，比如索引号为1的位置
 classmates.insert(1, 'Jack')
 # 要删除list末尾的元素，用pop()方法
@@ -80,3 +88,5 @@ n = input('请输入月份数（1-12）：')
 pos = (int(n) - 1) * 3
 monthAbbrev = months[pos: pos+3]
 print('月份简写是：' + monthAbbrev + '.')
+
+
